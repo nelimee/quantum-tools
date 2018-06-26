@@ -1,0 +1,6 @@
+[submodule "error_analysis"]
+	path = error_analysis
+	url = https://github.com/nelimeee/qasm2error.git
+[submodule "visualisation"]
+	path = visualisation
+	url = https://github.com/nelimeee/qasm2image.git
