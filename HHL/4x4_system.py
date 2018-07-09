@@ -109,8 +109,6 @@ cr = CRegister(Q_program.get_classical_register('cr'))
 cc = CRegister(Q_program.get_classical_register('cc'))
 classicalx = CRegister(Q_program.get_classical_register('classicalx'))
 
-skip = False
-
 ## 0. Initialise b
 circuit.comment("[4x4] Initialising b.")
 circuit.h(qb)
@@ -184,7 +182,7 @@ qasm_sim = get_backend('local_qasm_simulator')
 state_sim = get_backend('local_statevector_simulator')
 unitary_sim = get_backend('local_unitary_simulator')
 
-# res_qasm = execute([circuit], qasm_sim, shots=10**5, skip_translation=skip).result()
+# res_qasm = execute([circuit], qasm_sim, shots=10**5).result()
 # counts = res_qasm.get_counts()
 # filtered_counts = {key: counts[key] for key in counts if key[-1] == '1'}
 # significant_counts = {key: counts[key] for key in counts if counts[key] > 100}
@@ -193,7 +191,7 @@ unitary_sim = get_backend('local_unitary_simulator')
 #                                if filtered_counts[key] > 5000}
 # print("Counts:", counts, sep='\n')
 
-res_state = execute([circuit_no_measure], state_sim, skip_translation=skip).result()
+res_state = execute([circuit_no_measure], state_sim).result()
 statevector = round_to_zero(postselect(res_state.get_statevector(), 6, True), 1e-3)
 full_state = round_to_zero(res_state.get_statevector(), 1e-3)
 amplitudes = np.absolute(full_state)**2
